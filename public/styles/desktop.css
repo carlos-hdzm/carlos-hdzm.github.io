@@ -1,0 +1,138 @@
+body {
+  header {
+    display: grid;
+    justify-items: center;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "name links"
+      "title links";
+
+    h1 {
+      grid-area: name;
+    }
+
+    h2 {
+      grid-area: title;
+      margin-bottom: 1rem;
+    }
+
+    #header-links {
+      margin-top: 0;
+      grid-area: links;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-end;
+    }
+  }
+
+  main {
+    --main-column-gap: 2rem;
+    padding-block: 0;
+    display: grid;
+    gap: 0 calc(var(--main-column-gap) / 2);
+    grid-template-columns: 1fr 4fr;
+    grid-template-areas:
+      "nav about-me"
+      "nav projects"
+      "nav stack-skills"
+      "nav publications";
+
+    nav {
+      grid-area: nav;
+      gap: 1rem;
+      align-self: start;
+      position: sticky;
+      top: 0;
+      padding-top: 1rem;
+
+      ul {
+        display: block;
+
+        li {
+          border: 2px solid var(--border-color);
+
+          &:first-child {
+            border-radius: 0.5rem 0.5rem 0 0;
+          }
+
+          &:not(:first-child) {
+            border-top: none;
+          }
+
+          &:last-child {
+            border-radius: 0 0 0.5rem 0.5rem;
+          }
+
+          a {
+            border-radius: inherit;
+          }
+        }
+      }
+    }
+
+    h3 {
+      text-align: left;
+    }
+
+    section {
+      border-left: 1px solid var(--border-color);
+      padding-left: calc(var(--main-column-gap) / 2);
+
+      &:last-of-type {
+        padding-bottom: 1rem;
+      }
+    }
+
+    #about-me {
+      grid-area: about-me;
+
+      #profile-picture-container {
+        width: fit-content;
+        float: left;
+
+        #profile-picture {
+          width: 100%;
+          margin: 0 1rem 1rem 0;
+          max-width: 322px;
+        }
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    #projects {
+      grid-area: projects;
+
+      ul {
+        flex-flow: row wrap;
+
+        li.project {
+          flex-basis: calc(50% - var(--project-gap) / 2);
+        }
+      }
+    }
+
+    #stack-skills {
+      grid-area: stack-skills;
+    }
+
+    #publications {
+      grid-area: publications;
+    }
+  }
+
+  footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem 3rem;
+
+    #footer-links {
+      margin-top: 1rem;
+      justify-content: flex-end;
+    }
+  }
+}

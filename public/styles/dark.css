@@ -1,0 +1,39 @@
+:root[data-color-scheme="dark"] {
+  --background: #00023e;
+  --text-color: #e6e6e6;
+  --text-color-alt: #3a3a3a;
+  --border-color: #64d0fc;
+  --link-color: #c5dcf5;
+  --link-color-alt: #002e5f;
+  --box-bg-color: #343345;
+  --language-bg: #007020;
+  --library-bg: #0467aa;
+  --tool-bg: #c796f5;
+  --familiar-bg: #ffa500;
+
+  body {
+    header {
+      h1 {
+        background-image: url(../assets/images/icons/logo-dark.svg);
+      }
+    }
+
+    main {
+      #stack-skills {
+        ul {
+          li.skill {
+            &.skill-language,
+            &.skill-library {
+              --skill-text-color: var(--text-color);
+            }
+
+            &.skill-tool,
+            &.skill-familiar {
+              --skill-text-color: var(--text-color-alt);
+            }
+          }
+        }
+      }
+    }
+  }
+}
