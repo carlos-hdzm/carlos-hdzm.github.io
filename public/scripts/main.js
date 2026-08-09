@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document
       .getElementById(`color-scheme-${currentScheme}`)
       .classList.add("active");
+    colorSchemeToggle.setAttribute("aria-label", `Toggle color scheme, currently set to ${currentScheme}`);
   })();
 
   colorSchemeToggle.addEventListener("click", () => {
@@ -33,5 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document
       .getElementById(`color-scheme-${newScheme}`)
       .classList.add("active");
+
+    const colorSchemeStatus = document.getElementById("color-scheme-status");
+    colorSchemeStatus.textContent = `Color scheme changed to ${newScheme}.`;
+    colorSchemeToggle.setAttribute("aria-label", `Toggle color scheme, currently set to ${newScheme}`);
   });
 });

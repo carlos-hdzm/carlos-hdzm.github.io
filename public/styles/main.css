@@ -29,6 +29,18 @@ body {
   background-color: var(--background);
   color: var(--text-color);
 
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   a {
     color: var(--link-color);
 
@@ -39,6 +51,22 @@ body {
       span {
         text-decoration: underline;
       }
+    }
+  }
+
+  #skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 999;
+    padding: 0.5rem;
+    background-color: var(--link-color);
+    color: var(--link-color-alt);
+    opacity: 0;
+
+    &:focus {
+      left: 0;
+      opacity: 1;
     }
   }
 
@@ -69,6 +97,7 @@ body {
       background-image: url(../assets/images/icons/logo.svg);
       background-size: 2.75rem;
       background-repeat: no-repeat;
+      background-position: left;
       padding-left: 3.75rem;
     }
 
@@ -94,9 +123,19 @@ body {
 
       #color-scheme-toggle {
         justify-self: center;
+        align-self: center;
         display: flex;
         justify-content: center;
         cursor: pointer;
+        padding: 0;
+        background: none;
+        border: none;
+        color: var(--text-color);
+
+        &:focus,
+        &:focus-visible {
+          outline-offset: 0.25rem;
+        }
 
         .color-scheme {
           padding: 0.5rem 1rem;
@@ -157,6 +196,11 @@ body {
             &:hover {
               background-color: var(--border-color);
               color: var(--link-color-alt);
+            }
+
+            &:focus,
+            &:focus-visible {
+              outline-offset: 0.5rem;
             }
           }
         }

@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="./public/assets/images/icons/favicon.ico" sizes="any" />
+    <link
+      rel="icon"
+      href="./public/assets/images/icons/favicon.ico"
+      sizes="any"
+    />
     <link
       rel="icon"
       href="./public/assets/images/icons/favicon.svg"
@@ -25,6 +29,9 @@
     <title>Carlos Hernandez-Schaefer</title>
   </head>
   <body>
+    <a href="#about-me" aria-hidden="true" id="skip-link"
+      >Skip to main content</a
+    >
     <header>
       <h1>Carlos Hernandez-Schaefer</h1>
       <h2>Software Developer</h2>
@@ -83,14 +90,20 @@
     </header>
     <main>
       <nav>
-        <div
+        <button
           id="color-scheme-toggle"
-          role="button"
           aria-label="Toggle color scheme"
+          tabindex="0"
         >
           <span id="color-scheme-light" class="color-scheme">Light</span>
           <span id="color-scheme-dark" class="color-scheme">Dark</span>
-        </div>
+        </button>
+        <span
+          id="color-scheme-status"
+          class="visually-hidden"
+          aria-live="polite"
+          aria-atomic="true"
+        ></span>
         <ul>
           <li>
             <a href="#about-me">About Me</a>
