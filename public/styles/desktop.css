@@ -111,6 +111,10 @@ body {
 
         li.project {
           flex-basis: calc(50% - var(--project-gap) / 2);
+
+          &#this-portfolio:nth-child(odd) {
+            flex-basis: 100%;
+          }
         }
       }
     }
