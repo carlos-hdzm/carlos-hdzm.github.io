@@ -12,7 +12,7 @@
 
 body {
   a {
-    &:not([data-content-url="true"])::after {
+    &:not([data-print-append-url="false"])::after {
       content: " (" attr(href) ")";
       word-break: break-word;
     }
@@ -21,6 +21,10 @@ body {
       content: " (https://www.carlos-hdzm.com" attr(href) ")";
       word-break: break-word;
     }
+  }
+
+  img[data-print-invert="true"] {
+    filter: invert(1);
   }
 
   .light-logo {
@@ -83,10 +87,6 @@ body {
             content: " (https://www.carlos-hdzm.com/)";
           }
         }
-      }
-
-      img.project-screenshot[data-invert-on-print="true"] {
-        filter: invert(1);
       }
     }
 
