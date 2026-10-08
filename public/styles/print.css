@@ -1,0 +1,107 @@
+@import "./main.css";
+@import "./desktop.css" (min-width: 768px);
+
+:root[data-color-scheme] {
+  --background: transparent;
+  --text-color: black;
+  --text-color-alt: white;
+  --box-bg-color: transparent;
+  --link-color: #0b3975;
+  --link-color-alt: white;
+}
+
+body {
+  a {
+    &:not([data-content-url="true"])::after {
+      content: " (" attr(href) ")";
+      word-break: break-word;
+    }
+
+    &[href^="/"]::after {
+      content: " (https://www.carlos-hdzm.com" attr(href) ")";
+      word-break: break-word;
+    }
+  }
+
+  .light-logo {
+    display: inline;
+  }
+
+  .dark-logo {
+    display: none;
+  }
+
+  main {
+    display: block;
+    padding-top: 0;
+
+    nav {
+      display: none;
+    }
+
+    h3 {
+      text-align: left;
+      page-break-after: avoid;
+    }
+
+    section {
+      border-left: none;
+      padding-left: 0;
+    }
+
+    #about-me {
+      #profile-picture-container {
+        width: fit-content;
+        float: left;
+
+        #profile-picture {
+          width: 100%;
+          margin: 0 1rem 1rem 0;
+          max-width: 2.5in;
+
+          @media (max-width: 500px) {
+            max-width: 1.5in;
+          }
+        }
+      }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    #projects {
+      ul li.project {
+        page-break-inside: avoid;
+
+        h5.tools ul li {
+          border: 1px solid var(--border-color);
+        }
+
+        &#this-portfolio {
+          .project-header > span::after {
+            content: " (https://www.carlos-hdzm.com/)";
+          }
+        }
+      }
+
+      img.project-screenshot[data-invert-on-print="true"] {
+        filter: invert(1);
+      }
+    }
+
+    #stack-skills {
+      ul li.skill {
+        background-color: var(--background);
+        border-color: var(--skill-color);
+        color: var(--text-color);
+      }
+    }
+
+    #publications {
+      ul li.publication {
+        page-break-inside: avoid;
+      }
+    }
+  }
+}
