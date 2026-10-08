@@ -12,10 +12,12 @@
   --familiar-bg: #ffa500;
 
   body {
-    header {
-      h1 {
-        background-image: url(../assets/images/icons/logo-dark.svg);
-      }
+    .light-logo {
+      display: none;
+    }
+
+    .dark-logo {
+      display: inline;
     }
 
     main {
@@ -32,16 +34,6 @@
               --skill-text-color: var(--text-color-alt);
             }
           }
-        }
-      }
-
-      #projects > ul li.project#this-portfolio {
-        .light-logo {
-          display: none;
-        }
-
-        .dark-logo {
-          display: inline;
         }
       }
     }

@@ -88,6 +88,14 @@ body {
     }
   }
 
+  .light-logo {
+    display: inline;
+  }
+
+  .dark-logo {
+    display: none;
+  }
+
   header {
     text-align: center;
 
@@ -96,11 +104,15 @@ body {
       font-size: 1.75rem;
       width: fit-content;
       margin: 0 auto 0.5rem;
-      background-image: url(../assets/images/icons/logo.svg);
-      background-size: 2.75rem;
-      background-repeat: no-repeat;
-      background-position: left;
-      padding-left: 3.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      img {
+        width: 2.75rem;
+        height: 2.75rem;
+        vertical-align: middle;
+      }
     }
 
     h2 {
@@ -252,7 +264,8 @@ body {
             line-height: 1.25rem;
             margin-block: 0;
 
-            a, & > span {
+            a,
+            & > span {
               display: block;
 
               img {
@@ -284,25 +297,16 @@ body {
             }
           }
 
+          p:last-child {
+            margin-bottom: 0;
+          }
+
           img.project-screenshot {
+            display: block;
             width: 100%;
             max-width: 600px;
             height: auto;
             margin-inline: auto;
-          }
-
-          &#this-portfolio {
-            .light-logo {
-              display: inline;
-            }
-
-            .dark-logo {
-              display: none;
-            }
-
-            p:last-child {
-              margin-bottom: 0;
-            }
           }
         }
       }
@@ -377,6 +381,11 @@ body {
 
             a {
               display: block;
+              text-decoration: none;
+
+              span {
+                text-decoration: underline;
+              }
             }
           }
 
