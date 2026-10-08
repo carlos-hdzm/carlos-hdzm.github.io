@@ -1,0 +1,7 @@
+User-agent: *
+Content-Signal: search=yes,ai-train=no,use=reference
+Allow: /computed-23andme/
+
+User-agent: *
+Content-Signal: search=no,ai-train=no,use=no
+Disallow: /api/
