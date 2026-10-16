@@ -11,30 +11,6 @@
 }
 
 body {
-  a {
-    &:not([data-print-append-url="false"])::after {
-      content: " (" attr(href) ")";
-      word-break: break-word;
-    }
-
-    &[href^="/"]::after {
-      content: " (https://www.carlos-hdzm.com" attr(href) ")";
-      word-break: break-word;
-    }
-  }
-
-  img[data-print-invert="true"] {
-    filter: invert(1);
-  }
-
-  .light-logo {
-    display: inline;
-  }
-
-  .dark-logo {
-    display: none;
-  }
-
   main {
     display: block;
     padding-top: 0;

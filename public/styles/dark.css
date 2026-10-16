@@ -12,14 +12,6 @@
   --familiar-bg: #ffa500;
 
   body {
-    .light-logo {
-      display: none;
-    }
-
-    .dark-logo {
-      display: inline;
-    }
-
     main {
       #stack-skills {
         ul {
