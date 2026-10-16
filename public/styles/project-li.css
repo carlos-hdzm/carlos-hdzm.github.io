@@ -1,0 +1,119 @@
+@import "./common.css";
+
+body main #projects > ul {
+  display: flex;
+  flex-flow: column;
+  --project-gap: 1rem;
+  gap: var(--project-gap);
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+body main #projects > ul {
+  & > li.project,
+  & > project-li {
+    width: 100%;
+
+    @media (min-width: 768px) {
+      flex-basis: calc(50% - var(--project-gap) / 2);
+
+      &#this-portfolio:nth-child(odd) {
+        flex-basis: 100%;
+      }
+    }
+  }
+}
+
+body main #projects > ul,
+:host {
+  li.project {
+    height: stretch;
+    border: 2px solid var(--border-color);
+    border-radius: 1rem;
+    background-color: var(--box-bg-color);
+    padding: 1rem;
+
+    .project-header {
+      line-height: 1.25rem;
+      margin-block: 0;
+
+      a,
+      & > span {
+        display: block;
+
+        img,
+        ::slotted(img) {
+          height: 2rem;
+          margin-right: 0.5rem;
+          vertical-align: middle;
+        }
+      }
+    }
+
+    h5 {
+      margin-block: 0.5rem 0;
+      font-style: italic;
+
+      &.tools {
+        ul,
+        ::slotted(ul) {
+          display: flex;
+          gap: 0.25rem;
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+
+          li {
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+            background-color: var(--background);
+          }
+        }
+      }
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    img.project-screenshot,
+    ::slotted(img.project-screenshot) {
+      display: block;
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      margin-inline: auto;
+    }
+
+    @media print {
+      page-break-inside: avoid;
+
+      h5.tools {
+        ul {
+          li {
+            border: 1px solid var(--border-color);
+          }
+        }
+      }
+
+      &#this-portfolio {
+        .project-header > span::after {
+          content: " (" var(--base-url) "/)";
+        }
+      }
+    }
+  }
+}
+
+:host {
+  li.project {
+    .project-header a {
+      text-decoration: none;
+
+      ::slotted(span) {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -50,22 +50,6 @@ body {
       }
     }
 
-    #projects {
-      ul li.project {
-        page-break-inside: avoid;
-
-        h5.tools ul li {
-          border: 1px solid var(--border-color);
-        }
-
-        &#this-portfolio {
-          .project-header > span::after {
-            content: " (https://www.carlos-hdzm.com/)";
-          }
-        }
-      }
-    }
-
     #stack-skills {
       ul li.skill {
         background-color: var(--background);
