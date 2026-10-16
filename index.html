@@ -190,69 +190,6 @@
       <section id="projects">
         <h3>Projects</h3>
         <ul>
-          <li class="project">
-            <h4 class="project-header">
-              <a
-                href="https://marketplace.visualstudio.com/items?itemName=carlos-hdzm.markdown-format-menu"
-                target="_blank"
-                ><img
-                  src="./public/assets/images/projects/markdown-format-menu/logo.svg"
-                  alt="Markdown Format Menu extension logo"
-                />
-                <span>Markdown Format Menu</span>
-              </a>
-            </h4>
-            <h5 class="version">v1.0.4</h5>
-            <h5 class="tools">
-              <ul>
-                <li>TypeScript</li>
-                <li>VSCode API</li>
-                <li>Chai</li>
-                <li>Azure Pipelines</li>
-              </ul>
-            </h5>
-            <p>
-              A Visual Studio Code extension that provides a context menu for
-              formatting Markdown text.
-            </p>
-            <img
-              src="./public/assets/images/projects/markdown-format-menu/screenshot.gif"
-              alt="Markdown Format Menu extension screenshot"
-              class="project-screenshot"
-              data-print-invert="true"
-            />
-          </li>
-          <li class="project">
-            <h4 class="project-header">
-              <a href="/computed-23andme" target="_blank"
-                ><img
-                  src="./public/assets/images/projects/computed-23andme/logo.svg"
-                  alt="Computed 23andMe logo"
-                />
-                <span>Computed 23andMe</span>
-              </a>
-            </h4>
-            <h5 class="version">v1.0.3</h5>
-            <h5 class="tools">
-              <ul>
-                <li>TypeScript</li>
-                <li>React</li>
-                <li>Vite</li>
-                <li>Vitest</li>
-                <li>GitHub Actions</li>
-              </ul>
-            </h5>
-            <p>
-              A visualization tool for 23andMe Computed Data, which shows
-              unsmoothed ethnicity predictions not available on the published
-              results.
-            </p>
-            <img
-              src="./public/assets/images/projects/computed-23andme/screenshot.png"
-              alt="Computed 23andMe screenshot"
-              class="project-screenshot"
-            />
-          </li>
           <li class="project" id="this-portfolio">
             <h4 class="project-header">
               <span>
@@ -429,5 +366,43 @@
       </div>
     </footer>
     <script src="./public/scripts/main.js"></script>
+    <script type="module" src="./public/scripts/fetch-projects.js"></script>
+    <template id="project-template">
+      <style>
+        @import "./public/styles/project-li.css";
+      </style>
+      <li class="project">
+        <h4 class="project-header">
+          <a href="#" target="_blank">
+            <slot name="logo"><img src="" alt="Project Logo" /></slot>
+            <slot name="name">Project Name</slot>
+          </a>
+        </h4>
+        <h5 class="version"><slot name="version">Unreleased</slot></h5>
+        <h5 class="tools">
+          <slot name="tool-list">
+            <ul>
+              <li>Tool</li>
+            </ul>
+          </slot>
+        </h5>
+        <slot name="description">Project Description</slot>
+        <slot name="screenshot"><img src="" alt="Project Screenshot" /></slot>
+      </li>
+    </template>
+    <template id="tool-template">
+      <style>
+        li {
+          padding: 0.125rem 0.25rem;
+          border-radius: 0.25rem;
+          background-color: var(--background);
+
+          @media print {
+            border: 1px solid var(--border-color);
+          }
+        }
+      </style>
+      <li><slot name="tool">Tool</slot></li>
+    </template>
   </body>
 </html>

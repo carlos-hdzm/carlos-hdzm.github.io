@@ -1,0 +1,43 @@
+[
+    {
+        "name": "markdown-format-menu",
+        "type": "extension",
+        "url": "https://marketplace.visualstudio.com/items?itemName=carlos-hdzm.markdown-format-menu",
+        "logo": "./public/assets/images/projects/markdown-format-menu/logo.svg",
+        "displayName": "Markdown Format Menu",
+        "tools": [
+            "TypeScript",
+            "VSCode API",
+            "Chai",
+            "Azure Pipelines"
+        ],
+        "description": "A Visual Studio Code extension that provides a context menu for formatting Markdown text.",
+        "screenshot": {
+            "src": "./public/assets/images/projects/markdown-format-menu/screenshot.gif",
+            "attributes": [
+                {
+                    "name": "data-print-invert",
+                    "value": "true"
+                }
+            ]
+        }
+    },
+    {
+        "name": "computed-23andme",
+        "type": "repo",
+        "url": "/computed-23andme",
+        "logo": "./public/assets/images/projects/computed-23andme/logo.svg",
+        "displayName": "Computed 23andMe",
+        "tools": [
+            "TypeScript",
+            "React",
+            "Vite",
+            "Vitest",
+            "GitHub Actions"
+        ],
+        "description": "A visualization tool for 23andMe Computed Data, which shows unsmoothed ethnicity predictions not available on the published results.",
+        "screenshot": {
+            "src": "./public/assets/images/projects/computed-23andme/screenshot.png"
+        }
+    }
+]
