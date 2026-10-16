@@ -55,7 +55,7 @@ const fetchExtensionsVersion = async (extensionList) => {
       );
       return extensionsVersions;
     } else {
-      console.error("Error fetching repo versions");
+      console.error("Error fetching extension versions");
       return { _error: true };
     }
   } catch (error) {
