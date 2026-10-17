@@ -75,23 +75,32 @@ const fetchExtensionsVersion = async (extensionList) => {
         extensionList.includes(ext.extensionName),
       );
 
-      const extensionsVersions = selectedExtensions.reduce(
-        (versions, extension) => {
+      const extensionsData = selectedExtensions.reduce(
+        (extensionData, extension) => {
           const latestVersion = extension.versions?.[0]?.version || null;
-          versions[extension.extensionName] = latestVersion
-            ? `v${latestVersion}`
-            : null;
-          return versions;
+          extensionData[extension.extensionName] = {
+            version: latestVersion ? `v${latestVersion}` : null,
+          };
+          const statistics = extension?.statistics || [];
+          const extensionInstalls = statistics.find(
+            (stat) => stat.statisticName === "install",
+          );
+          if (extensionInstalls?.value) {
+            extensionData[extension.extensionName].installs = Number.parseInt(
+              extensionInstalls.value,
+            );
+          }
+          return extensionData;
         },
         {},
       );
-      return extensionsVersions;
+      return extensionsData;
     } else {
-      console.error("Error fetching extension versions");
+      console.error("Error fetching extension data");
       return { _error: true };
     }
   } catch (error) {
-    console.error("Error fetching extension versions");
+    console.error("Error fetching extension data");
     return { _error: true };
   }
 };
@@ -136,10 +145,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!extensionVersions._error) {
       for (const extensionName in extensionVersions) {
         if (extensionVersions.hasOwnProperty(extensionName)) {
-          const version = extensionVersions[extensionName];
+          const { version, installs } = extensionVersions[extensionName];
           const project = projectList.find((p) => p.name === extensionName);
           if (project) {
             project.version = version;
+            if (installs) project.installs = installs;
           }
         }
       }

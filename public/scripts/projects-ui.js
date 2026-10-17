@@ -80,6 +80,16 @@ const populateProjects = (projectList) => {
       projectElement.appendChild(versionText);
       versionSlot.assign(versionText);
 
+      if (project.type === "extension" && project.installs) {
+        const installsWord = project.installs === 1 ? "install" : "installs";
+        const installsText = document.createTextNode(`${project.installs} ${installsWord}`);
+        const installsSlot = shadowRoot.querySelector('slot[name="installs"]');
+        projectElement.appendChild(installsText);
+        installsSlot.assign(installsText);
+        const installsContainer = installsSlot.parentElement;
+        installsContainer.classList.remove("unslotted");
+      }
+
       const toolsSlot = shadowRoot.querySelector('slot[name="tool-list"]');
       const toolsUl = document.createElement("ul");
       const toolsFragment = document.createDocumentFragment();
