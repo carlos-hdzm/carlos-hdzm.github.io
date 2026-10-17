@@ -1,40 +1,70 @@
 import populateProjects from "./projects-ui.js";
 
-const API_URLS = {
-  VSCODE_MARKETPLACE:
-    "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery",
+const APIS = {
+  VS_MARKETPLACE: {
+    /* Built with information from
+     * VSCode API implementation: https://github.com/microsoft/vscode/blob/main/src/vs/platform/extensionManagement/common/extensionGalleryService.ts
+     * VSCode API documentation: https://github.com/zx0r/vscode-api
+     */
+    URL: "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery",
+    VERSION: "7.2-preview.1",
+    // FilterType documentation: https://learn.microsoft.com/en-us/javascript/api/azure-devops-extension-api/extensionqueryfiltertype
+    FILTERS: {
+      PUBLISHER: 18,
+    },
+    // Flags documentation: https://learn.microsoft.com/en-us/javascript/api/azure-devops-extension-api/extensionqueryflags
+    FLAGS: {
+      // 0x200 to fetch the latest version
+      // 0x100 to fetch extension stats
+      // 0x1 to include version list
+      LATEST_VERSION_ONLY: 0x200,
+      STATISTICS: 0x100,
+      VERSIONS: 0x1,
+    },
+  },
   GITHUB: window.LOCAL_API_URL || "/api/fetch-github",
 };
 const PUBLISHER = "carlos-hdzm";
 const LOCAL_SECRET = window.LOCAL_SECRET || "";
 const PROJECTS_PATH = "/public/assets/content/projects.json";
 
-/* Built with information from
- * VSCode API implementation: https://github.com/microsoft/vscode/blob/main/src/vs/platform/extensionManagement/common/extensionGalleryService.ts
- * VSCode API documentation: https://github.com/zx0r/vscode-api
- * FilterType documentation: https://learn.microsoft.com/en-us/javascript/api/azure-devops-extension-api/extensionqueryfiltertype
- * Flags documentation: https://learn.microsoft.com/en-us/javascript/api/azure-devops-extension-api/extensionqueryflags
- */
+const useVSMarketPlaceFlags = (flags) => {
+  const availableFlags = APIS.VS_MARKETPLACE.FLAGS;
+  // Enable each flag in flags with an OR operation
+  // Nonexistent flags are turned to 0
+  return flags.reduce(
+    (flagValue, flag) =>
+      flagValue |
+      (availableFlags.hasOwnProperty(flag) ? availableFlags[flag] : 0),
+    0,
+  );
+};
+
 const fetchExtensionsVersion = async (extensionList) => {
   try {
-    const response = await fetch(API_URLS.VSCODE_MARKETPLACE, {
+    const VSMarketplaceProps = APIS.VS_MARKETPLACE;
+    const response = await fetch(VSMarketplaceProps.URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json;api-version=7.2-preview.1",
+        Accept: `application/json;api-version=${VSMarketplaceProps.VERSION}`,
       },
       body: JSON.stringify({
         filters: [
           {
             criteria: [
               {
-                filterType: 18, // Search by publisher
+                filterType: VSMarketplaceProps.FILTERS.PUBLISHER,
                 value: PUBLISHER,
               },
             ],
           },
         ],
-        flags: 513, // Combining flag 0x200 to fetch the latest version and flag 0x1 to include version list
+        flags: useVSMarketPlaceFlags([
+          "LATEST_VERSION_ONLY",
+          "STATISTICS",
+          "VERSIONS",
+        ]),
       }),
     });
 
@@ -48,7 +78,9 @@ const fetchExtensionsVersion = async (extensionList) => {
       const extensionsVersions = selectedExtensions.reduce(
         (versions, extension) => {
           const latestVersion = extension.versions?.[0]?.version || null;
-          versions[extension.extensionName] = latestVersion ? `v${latestVersion}` : null;
+          versions[extension.extensionName] = latestVersion
+            ? `v${latestVersion}`
+            : null;
           return versions;
         },
         {},
@@ -66,7 +98,7 @@ const fetchExtensionsVersion = async (extensionList) => {
 
 const fetchRepoVersion = async (repoList) => {
   try {
-    const response = await fetch(API_URLS.GITHUB, {
+    const response = await fetch(APIS.GITHUB, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +122,9 @@ const fetchRepoVersion = async (repoList) => {
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const { default: projectList } = await import(PROJECTS_PATH, { with: { type: "json" } });
+    const { default: projectList } = await import(PROJECTS_PATH, {
+      with: { type: "json" },
+    });
 
     // Fetch versions for extensions
     const extensionList = projectList
@@ -113,7 +147,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Fetch versions for repositories and extensions with null versions
     let repoList = projectList
-      .filter((project) => project.type === "repo" || project.version === null || project.version === undefined)
+      .filter(
+        (project) =>
+          project.type === "repo" ||
+          project.version === null ||
+          project.version === undefined,
+      )
       .map((project) => project.name);
 
     const repoVersions = await fetchRepoVersion(repoList);
