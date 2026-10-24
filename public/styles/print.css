@@ -44,6 +44,12 @@ body,
   .dark-logo {
     display: none;
   }
+
+  [data-print-show="true"] {
+    display: block;
+    font-weight: bold;
+    font-style: italic;
+  }
 }
 
 body main #projects > ul,
