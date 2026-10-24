@@ -376,6 +376,7 @@
     <template id="project-template">
       <style>
         @import "./public/styles/project-li.css";
+        @import "./public/styles/print.css" print;
       </style>
       <li class="project">
         <h4 class="project-header">
@@ -401,14 +402,12 @@
     </template>
     <template id="tool-template">
       <style>
+        @import "./public/styles/print-tool-template.css" print;
+        
         li {
           padding: 0.125rem 0.25rem;
           border-radius: 0.25rem;
           background-color: var(--background);
-
-          @media print {
-            border: 1px solid var(--border-color);
-          }
         }
       </style>
       <li><slot name="tool">Tool</slot></li>

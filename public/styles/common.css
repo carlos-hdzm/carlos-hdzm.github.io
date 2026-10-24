@@ -12,10 +12,6 @@ body,
     clip: rect(0 0 0 0);
     white-space: nowrap;
     border: 0;
-
-    @media print {
-      display: none;
-    }
   }
 
   a {
@@ -52,34 +48,6 @@ body,
 
   .dark-logo {
     display: none;
-  }
-
-  @media print {
-    a {
-      &:not([data-print-append-url="false"])::after {
-        content: " (" attr(href) ")";
-        word-break: break-word;
-      }
-
-      &[href^="/"]::after {
-        content: " (" var(--base-url) attr(href) ")";
-        word-break: break-word;
-      }
-    }
-
-    img, ::slotted(img) {
-      &[data-print-invert="true"] {
-        filter: invert(1);
-      }
-    }
-
-    .light-logo {
-      display: inline;
-    }
-
-    .dark-logo {
-      display: none;
-    }
   }
 }
 

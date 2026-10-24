@@ -10,6 +10,63 @@
   --link-color-alt: white;
 }
 
+body,
+:host {
+  --base-url: "https://www.carlos-hdzm.com";
+
+  .visually-hidden {
+    display: none;
+  }
+
+  a {
+    &:not([data-print-append-url="false"])::after {
+      content: " (" attr(href) ")";
+      word-break: break-word;
+    }
+
+    &[href^="/"]::after {
+      content: " (" var(--base-url) attr(href) ")";
+      word-break: break-word;
+    }
+  }
+
+  img,
+  ::slotted(img) {
+    &[data-print-invert="true"] {
+      filter: invert(1);
+    }
+  }
+
+  .light-logo {
+    display: inline;
+  }
+
+  .dark-logo {
+    display: none;
+  }
+}
+
+body main #projects > ul,
+:host {
+  li.project {
+    break-inside: avoid;
+
+    h5.tools {
+      ul {
+        li {
+          border: 1px solid var(--border-color);
+        }
+      }
+    }
+
+    &#this-portfolio {
+      .project-header > span::after {
+        content: " (" var(--base-url) "/)";
+      }
+    }
+  }
+}
+
 body {
   main {
     display: block;
@@ -21,7 +78,7 @@ body {
 
     h3 {
       text-align: left;
-      page-break-after: avoid;
+      break-after: avoid;
     }
 
     section {
@@ -55,12 +112,14 @@ body {
         background-color: var(--background);
         border-color: var(--skill-color);
         color: var(--text-color);
+        box-shadow: none;
+        border-width: 4px;
       }
     }
 
     #publications {
       ul li.publication {
-        page-break-inside: avoid;
+        break-inside: avoid;
       }
     }
   }

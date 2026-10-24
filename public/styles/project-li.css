@@ -89,24 +89,6 @@ body main #projects > ul,
       height: auto;
       margin-inline: auto;
     }
-
-    @media print {
-      page-break-inside: avoid;
-
-      h5.tools {
-        ul {
-          li {
-            border: 1px solid var(--border-color);
-          }
-        }
-      }
-
-      &#this-portfolio {
-        .project-header > span::after {
-          content: " (" var(--base-url) "/)";
-        }
-      }
-    }
   }
 }
 
