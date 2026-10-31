@@ -39,5 +39,30 @@
         "screenshot": {
             "src": "./public/assets/images/projects/computed-23andme/screenshot.png"
         }
+    },
+    {
+        "name": "kinlines",
+        "type": "repo",
+        "url": "/kinlines",
+        "logo": "./public/assets/images/projects/kinlines/logo.svg",
+        "displayName": "Kinlines",
+        "tools": [
+            "OpenAI Codex",
+            "TypeScript",
+            "React",
+            "Vite",
+            "Vitest",
+            "GitHub Actions"
+        ],
+        "description": "Developed with Codex, it parses GEDCOM trees to analyze the relationships between two people in it, reporting average shared DNA. It was especially made for complex tree structures, including double cousins, endogamy, etc.",
+        "screenshot": {
+            "src": "./public/assets/images/projects/kinlines/screenshot.png",
+            "attributes": [
+                {
+                    "name": "data-print-invert",
+                    "value": "true"
+                }
+            ]
+        }
     }
 ]
