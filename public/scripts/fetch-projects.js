@@ -2,8 +2,8 @@ import populateProjects from "./projects-ui.js";
 
 const APIS = {
   VS_MARKETPLACE:
-    window.LOCAL_API_URL.VS_MARKETPLACE || "/api/project-data/vs-marketplace",
-  GITHUB: window.LOCAL_API_URL.GITHUB || "/api/project-data/github",
+    window.LOCAL_API_URL?.VS_MARKETPLACE || "/api/project-data/vs-marketplace",
+  GITHUB: window.LOCAL_API_URL?.GITHUB || "/api/project-data/github",
 };
 const LOCAL_SECRET = window.LOCAL_SECRET || "";
 const PROJECTS_PATH = "/public/assets/content/projects.json";
